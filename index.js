@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://dev:****@cluster0-c3iyx.mongodb.net:27017/videoteka', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://stefan_gg:****@cluster0-c3iyx.mongodb.net:27017/videoteka', {useNewUrlParser: true, useUnifiedTopology: true})
     .then(res => {
         console.log(res);
     })
