@@ -1,2 +1,1 @@
-# semos-node-mongo
- mongoDB Semos
+# node-mongo
