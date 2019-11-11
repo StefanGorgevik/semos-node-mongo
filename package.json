@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pr0pellerhead/node-mongo.git"
+    "url": "git+https://github.com/StefanGorgevik/semos-node-mongo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pr0pellerhead/node-mongo/issues"
+    "url": "https://github.com/StefanGorgevik/semos-node-mongo/issues"
   },
-  "homepage": "https://github.com/pr0pellerhead/node-mongo#readme",
+  "homepage": "https://github.com/StefanGorgevik/semos-node-mongo#readme",
   "dependencies": {
     "mongoose": "^5.7.8"
   }
