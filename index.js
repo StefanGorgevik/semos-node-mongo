@@ -16,7 +16,7 @@ const Student = mongoose.model(
     'student', new mongoose.Schema({
         first_name: String,
         last_name: String,
-        average_grade: String,
+        average_grade: Number,
         courses: [String],
         email: String,
         birthday: Date
@@ -29,7 +29,7 @@ const Student = mongoose.model(
 var s = new Student({
     first_name : "Mitko", 
     last_name : "Mitkovski", 
-    average_grade : "5.8", 
+    average_grade : 5.8, 
     courses : [
         "history", 
         "english"
