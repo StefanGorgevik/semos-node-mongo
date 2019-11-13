@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://stefan_gg:furious7@cluster0-ptuut.mongodb.net/videoteka?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://stefan_gg:****@cluster0-ptuut.mongodb.net/videoteka?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true

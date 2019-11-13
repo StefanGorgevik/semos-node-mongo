@@ -1,48 +1,26 @@
-const mongoose = require('mongoose')
+const express = require('express');
+const app = express();
+const filmovi = require('./handlers/filmovi');
 
-mongoose.connect('mongodb+srv://stefan_gg:furious7@cluster0-ptuut.mongodb.net/school?retryWrites=true&w=majority',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(res => {
-        console.log(res);
-    })
-    .catch(err => {
-        console.log(err)
-    })
+//connection from db/connection(mongodb with mongoose)
+const DBConnection = require('./db/connection');
+DBConnection.init();
 
-const Student = mongoose.model(
-    'student', new mongoose.Schema({
-        first_name: String,
-        last_name: String,
-        average_grade: Number,
-        courses: [String],
-        email: String,
-        birthday: Date
-    },
-    {
-        collection: 'students'
-    })
-)
+const bodyParser = require("body-parser")
+app.use(bodyParser.json())
 
-var s = new Student({
-    first_name : "Mitko", 
-    last_name : "Mitkovski", 
-    average_grade : 5.8, 
-    courses : [
-        "history", 
-        "english"
-    ], 
-    email : "stefan@hotmail.com", 
-    birthday : new Date("1995-12-15T00:00:00Z")
-})
+app.get('/app/v1/filmovi', filmovi.getAll);
+app.get('/app/v1/filmovi/:id', filmovi.getOne);
+app.post('/app/v1/filmovi', filmovi.save);
+app.put('/app/v1/filmovi/:id', filmovi.replace);
+app.patch('/app/v1/filmovi/:id', filmovi.update);
+app.delete('/app/v1/filmovi/:id', filmovi.remove);
 
-
-s.save(err => {
-    if(err) {
-        console.log('could not save student');
+app.listen(8080, (err) => {
+    if (err) {
+        console.log("Server could not start");
+        console.log(err);
         return;
     }
-    console.log('student saved successful')
+    console.log("Server started successfully");
 })
