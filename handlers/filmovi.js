@@ -1,7 +1,7 @@
-const mFilmovi = require('../models/filmovi')
+const modelFilmovi = require('../models/filmovi')
 
 const getAll = (req, res) => {
-    mFilmovi.getAll()
+    modelFilmovi.getAll()
     .then(data => {
         res.status(200).send(data)
     })
@@ -11,7 +11,7 @@ const getAll = (req, res) => {
 }
 
 const getOne = (req, res) => {
-    mFilmovi.getOne(req.params.id)
+    modelFilmovi.getOne(req.params.id)
     .then(data => {
         res.status(200).send(data)
     })
@@ -21,18 +21,17 @@ const getOne = (req, res) => {
 }
 
 const save = (req, res) => {
-    var data = req.body;
-    console.log(data)
+    var film = req.body;
     let errors = 0;
-    if(data.ime == undefined || data.ime.length == 0){errors++}
-    if(data.rezija == undefined || data.rezija.length == 0){errors++}
-    if(data.godina == undefined || data.godina.length == 0){errors++}
-    if(data.zanr == undefined || data.zanr.length == 0){errors++}
-    if(data.akteri == undefined || data.akteri.length == 0){errors++}
-    if(data.oscar == undefined){errors++}
+    if(film.ime == undefined || film.ime.length == 0){errors++}
+    if(film.rezija == undefined || film.rezija.length == 0){errors++}
+    if(film.godina == undefined || film.godina.length == 0){errors++}
+    if(film.zanr == undefined || film.zanr.length == 0){errors++}
+    if(film.akteri == undefined || film.akteri.length == 0){errors++}
+    if(film.oscar == undefined){errors++}
     
     if(errors == 0) {
-        mFilmovi.save(data)
+        modelFilmovi.save(film)
     .then(() => {
         res.status(201).send("Created");
     })
@@ -45,16 +44,49 @@ const save = (req, res) => {
 }
 
 const replace = (req, res) => {
-    res.send('OK');
+    var film = req.body;
+    let error = 0;
+    if(film.ime == undefined || film.ime.length == 0){error++;}
+    if(film.godina == undefined || film.godina.length == 0){error++;}
+    if(film.zanr == undefined || film.zanr.length == 0){error++;}
+    if(film.rezija == undefined || film.rezija.length == 0){error++;}
+    if(film.akterrori == undefined || film.akterrori.length == 0){error++;}
+    if(film.oskar == undefined){error++;}
+
+    if(error == 0){
+        modelFilmovi.replace(req.params.id, film)
+        .then(() => {
+            res.status(201).send('Replaced');
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
+    } else {
+        res.status(400).send('Bad request');
+    }
 }
 
 const update = (req, res) => {
-    res.send('OK');
+    var film = req.body;
+    modelFilmovi.replace(req.params.id, film)
+    .then(() => {
+        res.status(201).send('Updated');
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
 }
 
 const remove = (req, res) => {
-    res.send('OK');
+    modelFilmovi.remove(req.params.id)
+    .then(() => {
+        res.status(201).send('Removed');
+    })
+    .catch(err => {
+        res.status(500).send(err);
+    });
 }
+
 
 module.exports = {
     getAll,

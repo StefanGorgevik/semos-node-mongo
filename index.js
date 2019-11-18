@@ -4,17 +4,18 @@ const filmovi = require('./handlers/filmovi');
 
 //connection from db/connection(mongodb with mongoose)
 const DBConnection = require('./db/connection');
-DBConnection.init();
+DBConnection.initialize();
 
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
+const url = '/app/v1/filmovi'
 
-app.get('/app/v1/filmovi', filmovi.getAll);
-app.get('/app/v1/filmovi/:id', filmovi.getOne);
-app.post('/app/v1/filmovi', filmovi.save);
-app.put('/app/v1/filmovi/:id', filmovi.replace);
-app.patch('/app/v1/filmovi/:id', filmovi.update);
-app.delete('/app/v1/filmovi/:id', filmovi.remove);
+app.get(url, filmovi.getAll);
+app.get(url + '/:id', filmovi.getOne);
+app.post(url, filmovi.save);
+app.put(url + '/:id', filmovi.replace);
+app.patch(url + '/:id', filmovi.update);
+app.delete(url + '/:id', filmovi.remove);
 
 app.listen(8080, (err) => {
     if (err) {

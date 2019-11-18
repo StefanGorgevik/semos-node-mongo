@@ -38,8 +38,8 @@ const getOne = (id) => {
 
 const save = (data) => {
     return new Promise((success, fail) => {
-        var f = new Film(data)
-        f.save(data, err => {
+        var film = new Film(data)
+        film.save(data, err => {
             if (err) {
                 return fail(err)
             }
@@ -48,8 +48,45 @@ const save = (data) => {
     })
 }
 
+const replace = (id, data) => {
+    return new Promise((success, fail) => {
+        Film.findByIdAndUpdate(id, data, err => {
+            if(err){
+                return fail(err);
+            }
+            return success();
+        });
+    });
+};
+
+const update = (id, data) => {
+    return new Promise((success, fail) => {
+        Film.findByIdAndUpdate(id, {$set: {data}}, err => {
+            if(err){
+                return fail(err);
+            }
+            return success();
+        });
+    });
+};
+
+const remove = (id) => {
+    return new Promise((success, fail) => {
+        Film.findByIdAndRemove(id, err => {
+            if(err){
+                return fail(err);
+            }
+            return success();
+        });
+    });
+};
+
+
 module.exports = {
     getAll,
     getOne,
-    save
+    save,
+    replace,
+    update,
+    remove
 }
