@@ -29,7 +29,6 @@ const save = (req, res) => {
     if(film.zanr == undefined || film.zanr.length == 0){errors++}
     if(film.akteri == undefined || film.akteri.length == 0){errors++}
     if(film.oscar == undefined){errors++}
-    
     if(errors == 0) {
         modelFilmovi.save(film)
     .then(() => {
@@ -47,22 +46,15 @@ const replace = (req, res) => {
     var film = req.body;
     let errors = 0;
     if(film.ime == undefined || film.ime.length == 0){errors++;}
-    console.log(errors)
     if(film.godina == undefined || film.godina.length == 0){errors++;}
-    console.log(errors)
     if(film.zanr == undefined || film.zanr.length == 0){errors++;}
-    console.log(errors)
     if(film.rezija == undefined || film.rezija.length == 0){errors++;}
-    console.log(errors)
     if(film.akteri == undefined || film.akteri.length == 0){errors++;}
-    console.log(errors)
     if(film.oscar == undefined){errors++;}
-    console.log(errors)
     if(errors == 0){
-        console.log(req.params.id, film)
         modelFilmovi.replace(req.params.id, film)
         .then(() => {
-            res.status(201).send('Replaced');
+            res.status(204).send('Item replaced');
         })
         .catch(err => {
             res.status(500).send(err);
@@ -76,7 +68,7 @@ const update = (req, res) => {
     var film = req.body;
     modelFilmovi.replace(req.params.id, film)
     .then(() => {
-        res.status(201).send('Updated');
+        res.status(201).send('Item updated');
     })
     .catch(err => {
         res.status(500).send(err);
@@ -86,7 +78,7 @@ const update = (req, res) => {
 const remove = (req, res) => {
     modelFilmovi.remove(req.params.id)
     .then(() => {
-        res.status(201).send('Removed');
+        res.status(204).send();
     })
     .catch(err => {
         res.status(500).send(err);

@@ -3,8 +3,12 @@ const app = express();
 const filmovi = require('./handlers/filmovi');
 
 //connection from db/connection(mongodb with mongoose)
+const config = require('./config/index')
 const DBConnection = require('./db/connection');
-DBConnection.initialize();
+
+var c = config.getConfig("db");
+DBConnection.initialize(c);
+
 
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
