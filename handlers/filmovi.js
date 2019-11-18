@@ -45,15 +45,21 @@ const save = (req, res) => {
 
 const replace = (req, res) => {
     var film = req.body;
-    let error = 0;
-    if(film.ime == undefined || film.ime.length == 0){error++;}
-    if(film.godina == undefined || film.godina.length == 0){error++;}
-    if(film.zanr == undefined || film.zanr.length == 0){error++;}
-    if(film.rezija == undefined || film.rezija.length == 0){error++;}
-    if(film.akterrori == undefined || film.akterrori.length == 0){error++;}
-    if(film.oskar == undefined){error++;}
-
-    if(error == 0){
+    let errors = 0;
+    if(film.ime == undefined || film.ime.length == 0){errors++;}
+    console.log(errors)
+    if(film.godina == undefined || film.godina.length == 0){errors++;}
+    console.log(errors)
+    if(film.zanr == undefined || film.zanr.length == 0){errors++;}
+    console.log(errors)
+    if(film.rezija == undefined || film.rezija.length == 0){errors++;}
+    console.log(errors)
+    if(film.akteri == undefined || film.akteri.length == 0){errors++;}
+    console.log(errors)
+    if(film.oscar == undefined){errors++;}
+    console.log(errors)
+    if(errors == 0){
+        console.log(req.params.id, film)
         modelFilmovi.replace(req.params.id, film)
         .then(() => {
             res.status(201).send('Replaced');
