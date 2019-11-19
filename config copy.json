@@ -1,8 +1,8 @@
 {
     "db": {
-        "host": "",
-        "dbname": "",
-        "username": "",
-        "password": ""
+        "host": "cluster0-ptuut.mongodb.net",
+        "dbname": "videoteka",
+        "username": "stefan_gg",
+        "password": "furious7"
     }
 }
