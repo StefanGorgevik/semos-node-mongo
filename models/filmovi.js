@@ -51,7 +51,7 @@ const save = (data) => {
 const replace = (id, data) => {
     return new Promise((success, fail) => {
         Film.findByIdAndUpdate(id, data, err => {
-            if(err){
+            if (err) {
                 return fail(err);
             }
             return success();
@@ -61,8 +61,8 @@ const replace = (id, data) => {
 
 const update = (id, data) => {
     return new Promise((success, fail) => {
-        Film.findByIdAndUpdate(id, {$set: {data}}, err => {
-            if(err){
+        Film.findByIdAndUpdate(id, { $set: { data } }, err => {
+            if (err) {
                 return fail(err);
             }
             return success();
@@ -73,14 +73,13 @@ const update = (id, data) => {
 const remove = (id) => {
     return new Promise((success, fail) => {
         Film.findByIdAndRemove(id, err => {
-            if(err){
+            if (err) {
                 return fail(err);
             }
             return success();
         });
     });
 };
-
 
 module.exports = {
     getAll,

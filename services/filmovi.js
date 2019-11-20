@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
-const filmovi = require('./handlers/filmovi');
+const filmovi = require('../handlers/filmovi');
 
 //connection from db/connection(mongodb with mongoose)
-const config = require('./config/index.js')
-const DBConnection = require('./db/connection');
-
+const config = require('../config/index.js')
+const DBConnection = require('../db/connection');
 
 var c = config.getConfig("db");
 DBConnection.initialize(c);
@@ -21,7 +20,7 @@ app.put(url + '/:id', filmovi.replace);
 app.patch(url + '/:id', filmovi.update);
 app.delete(url + '/:id', filmovi.remove);
 
-app.listen(8080, (err) => {
+app.listen(8000, (err) => {
     if (err) {
         console.log("Server could not start");
         console.log(err);

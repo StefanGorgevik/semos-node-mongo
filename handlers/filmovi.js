@@ -85,7 +85,6 @@ const remove = (req, res) => {
     });
 }
 
-
 module.exports = {
     getAll,
     getOne,
