@@ -4,5 +4,8 @@
         "dbname": "",
         "username": "",
         "password": ""
+    },
+    "jwt": {
+        "key": ""
     }
 }
