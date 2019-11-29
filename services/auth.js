@@ -8,6 +8,18 @@ const auth = require('../handlers/auth');
 DBConnection.initialize(config.getConfig('db'));
 app.use(bodyParser.json());
 
+var jwt = require('express-jwt');
+//https://www.npmjs.com/package/express-jwt
+//npm install express-jwt
+app.use(                                                       //sekoj req ke pomine niz ova i ke vrati req.user
+    jwt(
+        { secret: config.getConfig('jwt').key }
+    )
+        .unless(
+            { path: ['/app/v1/register', '/app/v1/login'] }
+        )
+);
+
 app.post('/app/v1/register', auth.register);
 app.post('/app/v1/login', auth.login);
 app.get('/app/v1/renew', auth.renew);

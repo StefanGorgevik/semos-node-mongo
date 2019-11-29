@@ -9,6 +9,13 @@ const DBConnection = require('../db/connection');
 var c = config.getConfig("db");
 DBConnection.initialize(c);
 
+var jwt = require('express-jwt');
+app.use(                                                       //sekoj req ke pomine niz ova i ke vrati req.user
+    jwt(
+        { secret: config.getConfig('jwt').key }
+    )   //na site ruti ocekuvame listanje(ne treba unless)
+);
+
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 const url = '/app/v1/filmovi'
