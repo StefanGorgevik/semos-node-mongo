@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const config = require('../config/index');
 const DBConnection = require('../db/connection');
 const auth = require('../handlers/auth');
+const path = require('path')
 
 DBConnection.initialize(config.getConfig('db'));
 app.use(bodyParser.json());
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 // only for testing purposes
 // //////////////////////////
 var pub = path.join(__dirname, '..', 'public');
-api.use('/public', express.static(pub));
+app.use('/public', express.static(pub));
 // //////////////////////////
 // only for testing purposes
 // //////////////////////////
@@ -37,7 +38,7 @@ app.post('/app/v1/reset-link', auth.resetLink);
 app.post('/app/v1/reset-password', auth.resetPassword);
 app.post('/app/v1/change-password', auth.changePassword);
 
-api.use(function (err, req, res, next) {
+app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {
         res.status(401).send({message: 'Invalid token'});
     } else {

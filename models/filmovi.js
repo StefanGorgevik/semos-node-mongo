@@ -15,9 +15,9 @@ const Film = mongoose.model(
         })
 );
 
-const getAll = (userID) => {
+const getAll = (q, sort) => {
     return new Promise((success, fail) => {
-        Film.find({user_id: userID}, (err, data) => {
+        Film.find(q, {}, {sort: sort}, (err, data) => {
             if (err) {
                 return fail(err)
             }
@@ -25,6 +25,16 @@ const getAll = (userID) => {
         })
     })
 }
+// const getAll = (userID) => {
+//     return new Promise((success, fail) => {
+//         Film.find({user_id: userID}, (err, data) => {
+//             if (err) {
+//                 return fail(err)
+//             }
+//             return success(data)
+//         })
+//     })
+// }
 
 const getOne = (id, userID) => {
     return new Promise((success, fail) => {
