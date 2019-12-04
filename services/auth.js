@@ -8,6 +8,16 @@ const auth = require('../handlers/auth');
 DBConnection.initialize(config.getConfig('db'));
 app.use(bodyParser.json());
 
+
+// //////////////////////////
+// only for testing purposes
+// //////////////////////////
+var pub = path.join(__dirname, '..', 'public');
+api.use('/public', express.static(pub));
+// //////////////////////////
+// only for testing purposes
+// //////////////////////////
+
 var jwt = require('express-jwt');
 //https://www.npmjs.com/package/express-jwt
 //npm install express-jwt
@@ -26,6 +36,14 @@ app.get('/app/v1/renew', auth.renew);
 app.post('/app/v1/reset-link', auth.resetLink);
 app.post('/app/v1/reset-password', auth.resetPassword);
 app.post('/app/v1/change-password', auth.changePassword);
+
+api.use(function (err, req, res, next) {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).send({message: 'Invalid token'});
+    } else {
+        next(err);
+    }
+});
 
 app.listen(8001, (err) => {
     if (err) {
