@@ -18,7 +18,7 @@ const getAll = (req, res) => {
         }
         q.godina.$gte = new Date(Number(req.query.godina_from))
     }
-    //new Date(2005-01-01 00:00:00).getDate()
+    //new Date('2005-01-01 00:00:00').getTime()
     //http://127.0.0.1:8000/app/v1/filmovi?godina_from=1104534000000
     //http://127.0.0.1:8000/app/v1/filmovi?godina_to=1104534000000&godina_from=978303600000
     if(req.query.godina_to != undefined) {
