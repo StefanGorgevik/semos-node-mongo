@@ -4,25 +4,29 @@ const files = require('../handlers/files');
 const fileupload = require('express-fileupload');
 const jwt = require('express-jwt');
 
-var api = express();
+var app = express();
 
-api.use(
+app.use(
     jwt(
-        {secret: config.getConfig('jwt').key}
+        { secret: config.getConfig('jwt').key }
     )
 );
 
-api.use(fileupload({
-    limits: {fileSize: 50 * 1024 * 1024},
+app.use(fileupload({
+    limits: { fileSize: 50 * 1024 * 1024 },
 }));
 
-api.post('/api/v1/upload', files.UploadFile);
+app.post('/app/v1/upload', files.UploadFile);
+app.get('/app/v1/upload/:filename', files.DownloadFile);
 
-api.listen(8002, err => {
-    if(err){
+app.listen(8002, err => {
+    if (err) {
         console.log('Could not start server');
         console.log(err);
         return;
     }
     console.log('Server successfully started on port 8002');
 });
+
+//https://octokit.github.io/rest.js/
+//https://sendgrid.com/
