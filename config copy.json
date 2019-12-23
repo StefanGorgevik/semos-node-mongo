@@ -5,6 +5,9 @@
         "username": "",
         "password": ""
     },
+    "mailer": {
+        "key": ""
+    },
     "jwt": {
         "key": ""
     }

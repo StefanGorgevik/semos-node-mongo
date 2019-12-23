@@ -27,11 +27,12 @@ app.use(                                                       //sekoj req ke po
         { secret: config.getConfig('jwt').key }
     )
         .unless(
-            { path: ['/app/v1/register', '/app/v1/login'] }
+            { path: ['/app/v1/register', '/app/v1/login','/public', '/app/v1/confirm/*'] }
         )
 );
 
 app.post('/app/v1/register', auth.register);
+app.get('/api/v1/confirm/:confirm_hash', auth.confirm);
 app.post('/app/v1/login', auth.login);
 app.get('/app/v1/renew', auth.renew);
 app.post('/app/v1/reset-link', auth.resetLink);
@@ -54,3 +55,6 @@ app.listen(8001, (err) => {
     }
     console.log("Server started successfully on port 8001");
 })
+
+//https://octokit.github.io/rest.js/
+//https://sendgrid.com/

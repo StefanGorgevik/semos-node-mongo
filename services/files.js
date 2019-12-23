@@ -28,5 +28,3 @@ app.listen(8002, err => {
     console.log('Server successfully started on port 8002');
 });
 
-//https://octokit.github.io/rest.js/
-//https://sendgrid.com/
