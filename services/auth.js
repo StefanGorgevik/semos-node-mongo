@@ -27,7 +27,7 @@ app.use(                                                       //sekoj req ke po
         { secret: config.getConfig('jwt').key }
     )
         .unless(
-            { path: ['/app/v1/register', '/app/v1/login','/public', '/app/v1/confirm/*'] }
+            { path: ['/app/v1/auth/register', '/app/v1/auth/login','/public', '/app/v1/auth/confirm/*'] }
         )
 );
 
