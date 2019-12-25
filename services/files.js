@@ -25,6 +25,6 @@ app.listen(8002, err => {
         console.log(err);
         return;
     }
-    console.log('Server successfully started on port 8002');
+    console.log('Server started successfully on port 8002');
 });
 

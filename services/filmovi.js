@@ -33,6 +33,6 @@ app.listen(8000, (err) => {
         console.log(err);
         return;
     }
-    console.log("Server started successfully");
+    console.log("Server started successfully on port 8000");
 })
 
