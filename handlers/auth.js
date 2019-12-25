@@ -12,48 +12,51 @@ const sgMail = require('@sendgrid/mail');
 const register = (req, res) => {
     var v = new validator.Validator(req.body, vUsers.createUser);
     v.check()
-        .then(matched => {
-            if (matched) {
-                bcrypt.genSalt(10, function (err, salt) {    //10 rounds, 10 pati vrti
-                    if (err) {
+    .then(matched => {
+        if(matched) {
+            bcrypt.genSalt(10, function(err, salt) {
+                if(err){
+                    throw new Error(err);
+                    return;
+                }
+                bcrypt.hash(req.body.password, salt, function(err, hash) {
+                    if(err){
                         throw new Error(err);
                         return;
                     }
-                    bcrypt.hash(req.body.password, salt, function (err, hash) {  //hashuva pw so salt(gi mesha)
-                        if (err) {
-                            throw new Error(err);
-                            return;
-                        }
-                        var confirm_hash = randomstring.generate({
-                            length: 30,
-                            charset: 'alphanumeric'
-                        });
-                        mUsers.createUser({
-                            ...req.body, password: hash, confirm_hash: confirm_hash, confirmed: false
-                        }); //od cel objekt od req.body go menjava samo pwto so hashuvan pw + dodava confirm_hash
-                        sgMail.setApiKey(config.getConfig('mailer').key);
-                        const msg = {
-                            to: req.body.email,
-                            from: 'hristijan.taseski@yahoo.com',
-                            subject: 'Thanks for registering',
-                            text: 'Thanks for registering',
-                            html: `<a href="http://localhost:8001/app/v1/confirm/${confirm_hash}">Thanks for registering</a>`
-                        };
-                        sgMail.send(msg);
-                        return;
+                    var confirm_hash = randomstring.generate({
+                        length: 30,
+                        charset: 'alphanumeric'
                     });
+                    mUsers.createUser({
+                        ...req.body, 
+                        password: hash,
+                        confirm_hash: confirm_hash,
+                        confirmed: false
+                    });
+                    sgMail.setApiKey(config.getConfig('mailer').key);
+                    const msg = {
+                        to: req.body.email,
+                        from: 'sgorgevik@gmail.com',
+                        subject: 'Thanks for registering',
+                        text: 'Thanks for registering',
+                        html: `<a href="http://localhost:8001/api/v1/confirm/${confirm_hash}">Click here to confirm your account</a>`,
+                    };
+                    sgMail.send(msg);
+                    return;
                 });
-            } else {
-                throw new Error('Validation failed');
-            }
-        })
-        .then(() => {
-            return res.status(201).send('ok');
-        })
-        .catch(err => {
-            console.log(err);
-            return res.status(500).send(v.errors);
-        });
+            });
+        } else {
+            throw new Error('Validation failed');
+        }
+    })
+    .then(() => {
+        return res.status(201).send('ok');
+    })
+    .catch(err => {
+        console.log(err);
+        return res.status(500).send(v.errors);
+    });
 }
 
 const login = (req, res) => {
@@ -92,9 +95,13 @@ const confirm = (req, res) => {
     // confirmed: true
     var hash = req.params.confirm_hash;
     mUsers.confirmUserAccount(hash)
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    return res.status(200).send('ok');
+    .then(() => {
+        return res.status(200).send('ok');
+    })
+    .catch((err) => {
+        console.log(err)
+        return res.status(500).send('Internal Server Error');
+    })
 }
 
 const renew = (req, res) => {
