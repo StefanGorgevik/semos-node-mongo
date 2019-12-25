@@ -16,8 +16,8 @@ app.all('/app/v1/files/*', (req, res) => {
     apyProxy.web(req, res, {target: 'https://localhost:8002'})
 })
 
-app.all('/*', (res, res) => {
-    req.status(404).send('Not Found!')
+app.all('/*', (req, res) => {
+    res.status(404).send('Not Found!')
 })
 
 app.listen(process.env.PORT, err => {
