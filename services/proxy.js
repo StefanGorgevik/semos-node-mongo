@@ -27,6 +27,6 @@ app.listen(porta, err => {
         console.log(err);
         return;
     }
-    console.log(`Server started successfully on port 5000 ${porta}`)
+    console.log(`Server started successfully on port ${porta}`)
 })
 

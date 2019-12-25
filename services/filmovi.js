@@ -23,9 +23,9 @@ const url = '/app/v1/filmovi/'
 app.get('/app/v1/filmovi/', filmovi.getAll);
 app.get('/app/v1/filmovi/:id', filmovi.getOne);
 app.post('/app/v1/filmovi/', filmovi.save);
-app.put('/app/v1/filmovi/', filmovi.replace);
-app.patch('/app/v1/filmovi/', filmovi.update);
-app.delete('/app/v1/filmovi/', filmovi.remove);
+app.put('/app/v1/filmovi/:id', filmovi.replace);
+app.patch('/app/v1/filmovi/:id', filmovi.update);
+app.delete('/app/v1/filmovi/:id', filmovi.remove);
 
 app.listen(8000, (err) => {
     if (err) {
