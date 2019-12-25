@@ -13,3 +13,4 @@ git status
 git add Procfile config.jso services/proxy.js
 git commit -am 'preparing for a heroku deployment'
 git push heroku master
+heroku logs --tail

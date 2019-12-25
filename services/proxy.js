@@ -16,5 +16,11 @@ app.all('/app/v1/files/*', (req, res) => {
     apyProxy.web(req, res, {target: 'https://localhost:8002'})
 })
 
-app.listen(5000)
+app.listen(process.env.PORT, err => {
+    if(err) {
+        console.log(err);
+        return;
+    }
+    console.log('Server started successfully on port 5000')
+})
 
