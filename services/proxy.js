@@ -20,11 +20,13 @@ app.all('/*', (req, res) => {
     res.status(404).send('Not Found!')
 })
 
-app.listen(process.env.PORT, err => {
+const porta = process.env.PORT;
+
+app.listen(porta, err => {
     if(err) {
         console.log(err);
         return;
     }
-    console.log('Server started successfully on port 5000')
+    console.log(`Server started successfully on port 5000 ${porta}`)
 })
 
