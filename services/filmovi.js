@@ -20,12 +20,12 @@ const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 const url = '/app/v1/filmovi/'
 
-app.get(url, filmovi.getAll);
-app.get(url + ':id', filmovi.getOne);
-app.post(url, filmovi.save);
-app.put(url + ':id', filmovi.replace);
-app.patch(url + ':id', filmovi.update);
-app.delete(url + ':id', filmovi.remove);
+app.get('/app/v1/filmovi/', filmovi.getAll);
+app.get('/app/v1/filmovi/:id', filmovi.getOne);
+app.post('/app/v1/filmovi/', filmovi.save);
+app.put('/app/v1/filmovi/', filmovi.replace);
+app.patch('/app/v1/filmovi/', filmovi.update);
+app.delete('/app/v1/filmovi/', filmovi.remove);
 
 app.listen(8000, (err) => {
     if (err) {
