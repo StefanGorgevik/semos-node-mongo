@@ -26,10 +26,8 @@
     "http-proxy": "^1.18.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.8",
+    "node-input-validator": "^4.1.0",
     "nodemon": "^2.0.1",
     "randomstring": "^1.1.5"
-  },
-  "devDependencies": {
-    "node-input-validator": "^4.1.0"
   }
 }
