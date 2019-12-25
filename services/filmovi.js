@@ -18,16 +18,16 @@ var jwt = require('express-jwt');
 
 const bodyParser = require("body-parser")
 app.use(bodyParser.json())
-const url = '/app/v1/filmovi'
+const url = '/app/v1/filmovi/'
 
 app.get(url, filmovi.getAll);
-app.get(url + '/:id', filmovi.getOne);
+app.get(url + ':id', filmovi.getOne);
 app.post(url, filmovi.save);
-app.put(url + '/:id', filmovi.replace);
-app.patch(url + '/:id', filmovi.update);
-app.delete(url + '/:id', filmovi.remove);
+app.put(url + ':id', filmovi.replace);
+app.patch(url + ':id', filmovi.update);
+app.delete(url + ':id', filmovi.remove);
 
-app.listen(8003, (err) => {
+app.listen(8000, (err) => {
     if (err) {
         console.log("Server could not start");
         console.log(err);
@@ -35,3 +35,4 @@ app.listen(8003, (err) => {
     }
     console.log("Server started successfully");
 })
+

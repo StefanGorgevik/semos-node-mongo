@@ -31,13 +31,13 @@ app.use(                                                       //sekoj req ke po
         )
 );
 
-app.post('/app/v1/register', auth.register);
-app.get('/api/v1/confirm/:confirm_hash', auth.confirm);
-app.post('/app/v1/login', auth.login);
-app.get('/app/v1/renew', auth.renew);
-app.post('/app/v1/reset-link', auth.resetLink);
-app.post('/app/v1/reset-password', auth.resetPassword);
-app.post('/app/v1/change-password', auth.changePassword);
+app.post('/app/v1/auth/register', auth.register);
+app.get('/api/v1/auth/confirm/:confirm_hash', auth.confirm);
+app.post('/app/v1/auth/login', auth.login);
+app.get('/app/v1/auth/renew', auth.renew);
+app.post('/app/v1/auth/reset-link', auth.resetLink);
+app.post('/app/v1/auth/reset-password', auth.resetPassword);
+app.post('/app/v1/auth/change-password', auth.changePassword);
 
 app.use(function (err, req, res, next) {
     if (err.name === 'UnauthorizedError') {

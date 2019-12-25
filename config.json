@@ -1,0 +1,14 @@
+{
+    "db": {
+        "host": "cluster0-ptuut.mongodb.net",
+        "dbname": "videoteka",
+        "username": "stefan_gg",
+        "password": "furious7"
+    },
+    "mailer": {
+        "key": "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"
+    },
+    "jwt": {
+        "key": "kluch"
+    }
+}

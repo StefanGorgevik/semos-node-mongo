@@ -16,8 +16,8 @@ app.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 },
 }));
 
-app.post('/app/v1/upload', files.UploadFile);
-app.get('/app/v1/upload/:filename', files.DownloadFile);
+app.post('/app/v1/files/upload', files.UploadFile);
+app.get('/app/v1/files/upload/:filename', files.DownloadFile);
 
 app.listen(8002, err => {
     if (err) {
